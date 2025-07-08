@@ -6,7 +6,7 @@ const Footer = () => {
           Feito com 🤎 por{" "}
           <span className="inline-flex flex-wrap justify-center items-center gap-1">
             <a
-              href="https://github.com/alvesmariadefatima"
+              href="https://github.com/danielyvasconcelos"
               target="_blank"
               rel="noopener noreferrer"
               className="text-amber-900 underline break-words"
