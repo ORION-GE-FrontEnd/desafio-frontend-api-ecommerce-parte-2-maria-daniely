@@ -1,6 +1,6 @@
 # 🛍️ OrionStore
 
-**OrionStore** é uma aplicação **Full-Stack E-commerce** desenvolvida com o objetivo de oferecer uma experiência completa de compra online. Nela, usuários podem se cadastrar, realizar login, navegar por produtos, adicionar itens ao carrinho, realizar o checkout e confirmar os dados do pedido — tudo de forma prática e intuitiva.
+OrionStore é uma aplicação Full-Stack E-commerce desenvolvida com o objetivo de oferecer uma experiência completa de compra online. Nela, usuários podem se cadastrar, realizar login, navegar por produtos, adicionar itens ao carrinho, realizar o checkout e confirmar os dados do pedido, tudo de forma prática e intuitiva.
 
 ## ✨ Funcionalidades
 
