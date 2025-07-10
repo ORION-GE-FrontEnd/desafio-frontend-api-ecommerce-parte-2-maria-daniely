@@ -15,21 +15,28 @@
 ## 🚀 Tecnologias Utilizadas
 
 ### 🖼️ **Frontend**
-- [React](https://reactjs.org/) – Biblioteca para construção da interface
-- [Typescript](https://www.typescriptlang.org/) – Superset do JavaScript com tipagem estática
-- [Tailwind CSS](https://tailwindcss.com/) – Framework utilitário para estilos rápidos e responsivos
-- [Yup](https://github.com/jquense/yup) – Validação de formulários com schema declarativo
+<p>
+  <img src="https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=black"/>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4.svg?style=for-the-badge&logo=Tailwind-CSS&logoColor=white"/>
+</p>
 
 ### ⚙️ **Backend**
-- [Node.js](https://nodejs.org/) – Ambiente de execução JavaScript
-- [Express.js](https://expressjs.com/) – Framework web para criação de APIs RESTful
+<p>
+  <img src="https://img.shields.io/badge/Node.js-5FA04E.svg?style=for-the-badge&logo=nodedotjs&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Express-000000.svg?style=for-the-badge&logo=Express&logoColor=white"/>
+</p>
 
 ### 🧪 **Testes**
-- [Jest](https://jestjs.io/) – Testes unitários no frontend
-- [Cypress](https://www.cypress.io/) – Testes end-to-end para simulação do comportamento real do usuário
+<p>
+  <img src="https://img.shields.io/badge/Jest-C21325.svg?style=for-the-badge&logo=Jest&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Cypress-69D3A7.svg?style=for-the-badge&logo=Cypress&logoColor=white"/>
+</p>
 
 ### 🎨 **Prototipação**
-- [Figma](https://www.figma.com/) – Design e prototipação da interface do usuário
+<p>
+  <img src="https://img.shields.io/badge/Figma-F24E1E.svg?style=for-the-badge&logo=Figma&logoColor=white"/>
+</p>
 
 ## 📦 Instalação
 
