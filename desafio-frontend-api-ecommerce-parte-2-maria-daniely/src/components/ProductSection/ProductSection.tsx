@@ -5,6 +5,7 @@ interface Produto {
   id: string;
   nome: string; 
   imagemUrl?: string; 
+  valor: number;
 }
 
 interface PropsSecaoProduto {
@@ -23,6 +24,7 @@ const SecaoProduto: React.FC<PropsSecaoProduto> = ({ titulo, produtos, adicionar
             key={produto.id}
             nomeProduto={produto.nome} 
             urlImagem={produto.imagemUrl} 
+            valor={produto.valor}
             adicionarAoCarrinho={() => adicionarAoCarrinho(produto.id)}
           />
         ))}
