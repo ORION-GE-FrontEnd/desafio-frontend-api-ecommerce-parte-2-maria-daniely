@@ -136,6 +136,7 @@ const SignUp = () => {
             <button
               type="submit"
               className="w-full sm:w-1/2 w-full bg-gray-800 text-pink-400 font-adlam px-6 py-3 text-lg rounded hover:bg-gray-700 transition-colors"
+              className="w-full sm:w-1/2 bg-gray-800 text-pink-400 font-adlam px-6 py-3 text-lg rounded hover:bg-gray-700 transition-colors"
             >
               Cadastrar
             </button>
