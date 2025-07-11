@@ -32,7 +32,6 @@ const Login = () => {
         <h2 className="text-center font-adlam text-2xl text-amber-900 mb-6">Login</h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {/* Campo de E-mail */}
           <div>
             <input
               type="email"
@@ -47,7 +46,6 @@ const Login = () => {
             )}
           </div>
 
-          {/* Campo de Senha */}
           <div>
             <input
               type="password"
@@ -64,7 +62,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full bg-amber-950 text-pink-400 font-adlam px-6 py-3 text-lg rounded hover:bg-amber-900 transition-colors"
+            className="w-full bg-gray-800 text-pink-400 font-adlam px-6 py-3 text-lg rounded hover:bg-gray-700 transition-colors"
           >
             Login
           </button>
