@@ -1,6 +1,6 @@
 # 🛍️ OrionStore
 
-**OrionStore** é uma aplicação **Full-Stack E-commerce** desenvolvida com o objetivo de oferecer uma experiência completa de compra online.  
+OrionStore é uma aplicação Full-Stack E-commerce desenvolvida com o objetivo de oferecer uma experiência completa de compra online.  
 Nela, usuários podem se cadastrar, realizar login, navegar por produtos, adicionar itens ao carrinho, realizar o checkout e confirmar os dados do pedido — tudo de forma prática e intuitiva.
 
 ---
@@ -26,6 +26,7 @@ As tecnologias foram escolhidas com foco em escalabilidade, experiência do usu�
 | Tecnologia | Badge | Justificativa |
 |------------|--------|----------------|
 | **React** | ![React](https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=black) | Biblioteca para construção de interfaces reativas e reutilizáveis, ideal para SPAs. |
+| **Vite** | ![Vite](https://img.shields.io/badge/Vite-646CFF.svg?style=for-the-badge&logo=Vite&logoColor=white) | O Vite é uma ferramenta de build e servidor de desenvolvimento ultrarrápido para projetos React, que oferece recarregamento instantâneo e compilação otimizada. |
 | **TypeScript** | ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white) | Fornece tipagem estática ao JavaScript, melhorando a legibilidade e segurança do código. |
 | **Tailwind CSS** | ![Tailwind](https://img.shields.io/badge/Tailwind%20CSS-06B6D4.svg?style=for-the-badge&logo=Tailwind-CSS&logoColor=white) | Framework utilitário que permite estilização rápida e responsiva sem sair do HTML. |
 
