@@ -3,6 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { signUpSchema } from "../../Schemas/signUpSchema";
 import Footer from "../Footer/Footer";
+import { useState } from "react";
 
 type SignUpFormInputs = {
   nome: string;
@@ -12,22 +13,42 @@ type SignUpFormInputs = {
 };
 
 const SignUp = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [signupError, setSignupError] = useState("");
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<SignUpFormInputs>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpFormInputs>({
     resolver: yupResolver(signUpSchema),
   });
 
   const onSubmit = (data: SignUpFormInputs) => {
-    console.log("Dados enviados: ", data);
+    const newUser = {
+      nome: data.nome,
+      email: data.email,
+      password: data.password,
+    };
+
+    const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
+
+    const emailExists = existingUsers.some(
+      (user: { email: string }) => user.email === newUser.email
+    );
+
+    if (emailExists) {
+      setSignupError("E-mail já cadastrado. Tente outro.");
+      return;
+    }
+
+    const updatedUsers = [...existingUsers, newUser];
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
+    setSignupError("");
 
     setTimeout(() => {
-        alert("Cadastro realizado com sucesso!");
-        navigate("/login");
+      alert("Cadastro realizado com sucesso!");
+      navigate("/login");
     }, 500);
   };
 
@@ -99,6 +120,10 @@ const SignUp = () => {
             )}
           </div>
 
+          {signupError && (
+            <p className="text-red-600 text-sm font-adlam mt-1">{signupError}</p>
+          )}
+
           <div className="flex flex-col sm:flex-row justify-between gap-4 pt-2">
             <button
               type="button"
@@ -110,7 +135,7 @@ const SignUp = () => {
 
             <button
               type="submit"
-              className="w-full sm:w-1/2 bg-amber-950 text-pink-400 font-adlam px-4 py-2 text-base rounded hover:bg-amber-900 transition-colors"
+              className="w-full sm:w-1/2 w-full bg-gray-800 text-pink-400 font-adlam px-6 py-3 text-lg rounded hover:bg-gray-700 transition-colors"
             >
               Cadastrar
             </button>
