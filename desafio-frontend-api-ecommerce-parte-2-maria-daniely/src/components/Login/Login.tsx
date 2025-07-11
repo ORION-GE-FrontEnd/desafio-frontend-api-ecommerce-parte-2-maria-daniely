@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../Schemas/loginSchema";
 import Footer from "../Footer/Footer";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 type LoginFormInputs = {
   email: string;
@@ -9,6 +11,9 @@ type LoginFormInputs = {
 };
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [loginError, setLoginError] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -19,7 +24,21 @@ const Login = () => {
 
   const onSubmit = (data: LoginFormInputs) => {
     console.log("Dados enviados:", data);
-    // lógica de login
+    const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
+
+    const foundUser = storedUsers.find(
+      (user: { email: string; password: string }) => 
+        user.email === data.email && user.password === data.password
+    );
+
+    if(foundUser) {
+      localStorage.setItem("user", JSON.stringify(foundUser));
+      setLoginError("");
+      alert("Login realizado com sucesso!");
+      navigate("/home");
+    } else {
+      setLoginError("E-mail ou senha incorretos.");
+    }
   };
 
   return (
@@ -59,6 +78,10 @@ const Login = () => {
               </p>
             )}
           </div>
+
+          {loginError && (
+            <p className="text-red-600 text-sm font-adlam mt-1">{loginError}</p>
+          )}
 
           <button
             type="submit"

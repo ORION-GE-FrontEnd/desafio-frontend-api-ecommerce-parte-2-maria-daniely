@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import SecaoProduto from '../ProductSection/ProductSection';
-import Footer from '../Footer/Footer'; 
+import Footer from '../Footer/Footer';
 
 const todosProdutos = [
   { id: 'p1', nome: 'Produto 1', imagemUrl: '', valor: 50.00 },
@@ -18,18 +18,31 @@ const produtosEletronicos = [
 ];
 
 const HomePage: React.FC = () => {
+  const [nomeUsuario, setNomeUsuario] = useState("");
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      const user = JSON.parse(userData);
+      setNomeUsuario(user.nome);
+    }
+  }, []);
+
   const BotaoSair = () => {
-    alert("Usuário deslogado!");
+    localStorage.removeItem("user");
+    alert("Sessão encerrada. Você será redirecionado.");
+    window.location.reload();
   };
 
   const BotaoAdicionarAoCarrinho = (idProduto: string) => {
     alert(`Produto ${idProduto} adicionado ao carrinho!`);
   };
 
-  return ( 
+  return (
     <div className="flex flex-col min-h-screen bg-rose-300 text-amber-900 font-adlam">
-      <Header nomeUsuario="Daniely" encerrarSessao={BotaoSair} /> 
-       <main className="flex-grow p-5 max-w-5xl mx-auto my-5 bg-rose-300">
+      <Header nomeUsuario={nomeUsuario} encerrarSessao={BotaoSair} />
+      
+      <main className="flex-grow p-5 max-w-5xl mx-auto my-5 bg-rose-300">
         <SecaoProduto
           titulo="Produtos"
           produtos={todosProdutos}
@@ -40,7 +53,8 @@ const HomePage: React.FC = () => {
           produtos={produtosEletronicos}
           adicionarAoCarrinho={BotaoAdicionarAoCarrinho}
         />
-       </main>
+      </main>
+
       <Footer />
     </div>
   );
