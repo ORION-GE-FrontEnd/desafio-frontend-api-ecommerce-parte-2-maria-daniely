@@ -1,32 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import CartItem from '../CartItem/CartItem';    
+import CartItem from '../CartItem/CartItem';   
 import CartSummary from '../CartSummary/CartSummary'; 
-
-interface ProdutoNoCarrinho { 
-  id: string;
-  nome: string; 
-  quantidade: number; 
-  precoUnitario: number; 
-}
+import { useSelector, useDispatch } from 'react-redux';
+import type { RootState, AppDispatch } from '../../store';
+import { alterarQuantidade, removerItem } from '../../store/cartSlice';
+import type { CartItem as CartItemType } from '../../types/cartTypes'; 
 
 const PaginaCarrinho: React.FC = () => { 
-  const [itensNoCarrinho, setItensNoCarrinho] = useState<ProdutoNoCarrinho[]>([ 
-    { id: 'p4', nome: 'Produto 4', quantidade: 2, precoUnitario: 50.00 },
-    { id: 'p3', nome: 'Produto 3', quantidade: 1, precoUnitario: 50.00 },
-    { id: 'p2', nome: 'Produto 2', quantidade: 3, precoUnitario: 50.00 },
-  ]);
-
+  const dispatch = useDispatch<AppDispatch>(); 
+  const itensNoCarrinho = useSelector((state: RootState) => state.carrinho.itens); 
+ 
   // Inicializa como "Visitante" para garantir que algo apareça
   const [nomeUsuario, setNomeUsuario] = useState('Visitante');
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
-    if(userData) {
+    if (userData) {
       try {
         const user = JSON.parse(userData);
-        if(user && user.nome) {
+        if (user && user.nome) {
           setNomeUsuario(user.nome);
         }
       } catch (error) {
@@ -42,19 +36,15 @@ const PaginaCarrinho: React.FC = () => {
   };
 
   const BotaoAlterarQuantidade = (id: string, novaQuantidade: number) => { 
-    setItensNoCarrinho(prevItens =>
-      prevItens.map(item =>
-        item.id === id ? { ...item, quantidade: novaQuantidade } : item
-      )
-    );
+    dispatch(alterarQuantidade({ id, novaQuantidade }));
   };
 
   const BotaoRemoverItem = (id: string) => { 
-    setItensNoCarrinho(prevItens => prevItens.filter(item => item.id !== id));
+    dispatch(removerItem(id));
   };
 
   const totalDoCarrinho = itensNoCarrinho.reduce( 
-    (acc, item) => acc + item.quantidade * item.precoUnitario,
+    (acc: number, item: CartItemType) => acc + item.quantidade * item.valor, 
     0
   );
 
@@ -74,16 +64,20 @@ const PaginaCarrinho: React.FC = () => {
         <h1 className="text-3xl md:text-4xl font-adlam text-amber-900 text-center mb-6 py-4">Carrinho de Compras</h1>
 
         <div className="space-y-4">
-          {itensNoCarrinho.map(item => (
-            <CartItem 
-              key={item.id}
-              nomeProduto={item.nome}
-              quantidade={item.quantidade}
-              valorUnitario={item.precoUnitario} 
-              mudarQuantidade={(novaQuantidade) => BotaoAlterarQuantidade(item.id, novaQuantidade)}
-              removerItem={() => BotaoRemoverItem(item.id)}
-            />
-          ))}
+          {itensNoCarrinho.length === 0 ? (
+            <p className="text-center text-lg font-adlam text-amber-900 mt-10">Seu carrinho está vazio.</p>
+          ) : (
+            itensNoCarrinho.map((item: CartItemType) => ( 
+              <CartItem
+                key={item.id}
+                nomeProduto={item.nome}
+                quantidade={item.quantidade}
+                valorUnitario={item.valor} 
+                mudarQuantidade={(novaQuantidade) => BotaoAlterarQuantidade(item.id, novaQuantidade)}
+                removerItem={() => BotaoRemoverItem(item.id)}
+              />
+            ))
+          )}
         </div>
 
         <CartSummary total={totalDoCarrinho} /> 

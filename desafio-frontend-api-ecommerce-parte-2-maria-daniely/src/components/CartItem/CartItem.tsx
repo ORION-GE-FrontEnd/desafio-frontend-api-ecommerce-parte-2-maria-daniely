@@ -68,7 +68,7 @@ const ItemCarrinho: React.FC<PropsItemCarrinho> = ({
         onClick={removerItem}
         className="ml-4 bg-red-600 text-white w-10 h-10 flex items-center justify-center rounded-md hover:bg-red-700 transition-colors"
       >
-        <img src="/src/assets/lixeiraa.svg" alt="Remover" className="w-6 h-6" />
+        <img src="/src/assets/lixeiraa.svg" alt="Remover" className="w-6 h-6" /> 
       </button>
     </div>
   );

@@ -2,31 +2,79 @@ import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import SecaoProduto from '../ProductSection/ProductSection';
 import Footer from '../Footer/Footer';
+import { useDispatch } from 'react-redux';
+import { adicionarItem } from '../../store/cartSlice';
+import type { Product } from '../../types/cartTypes';
 
-const todosProdutos = [
-  { id: 'p1', nome: 'Produto 1', imagemUrl: '', valor: 50.00 },
-  { id: 'p2', nome: 'Produto 2', imagemUrl: '', valor: 50.00 },
-  { id: 'p3', nome: 'Produto 3', imagemUrl: '', valor: 50.00 },
-  { id: 'p4', nome: 'Produto 4', imagemUrl: '', valor: 50.00 },
-];
-
-const produtosEletronicos = [
-  { id: 'e1', nome: 'Produto 5', imagemUrl: '', valor: 50.00 },
-  { id: 'e2', nome: 'Produto 6', imagemUrl: '', valor: 50.00 },
-  { id: 'e3', nome: 'Produto 7', imagemUrl: '', valor: 50.00 },
-  { id: 'e4', nome: 'Produto 8', imagemUrl: '', valor: 50.00 },
-];
+// formato dos dados da Fake Store API
+interface ProductAPI {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+}
 
 const HomePage: React.FC = () => {
-  const [nomeUsuario, setNomeUsuario] = useState("");
+  const dispatch = useDispatch();
+
+  const [produtosCarregados, setProdutosCarregados] = useState<Product[]>([]);
+  const [carregando, setCarregando] = useState<boolean>(true);
+  const [erro, setErro] = useState<string | null>(null);
+
+
+  const [nomeUsuario, setNomeUsuario] = useState('Visitante'); 
 
   useEffect(() => {
+    const carregarProdutos = async () => {
+      try {
+        setCarregando(true);
+        setErro(null); 
+        const resposta = await fetch('https://fakestoreapi.com/products');
+        
+        if (!resposta.ok) {
+          throw new Error(`Erro HTTP! Status: ${resposta.status}`);
+        }
+        
+        const dados: ProductAPI[] = await resposta.json();
+
+        const produtosMapeados: Product[] = dados.map(item => ({
+          id: String(item.id),
+          nome: item.title,
+          imagemUrl: item.image,
+          valor: item.price,
+        }));
+        
+        setProdutosCarregados(produtosMapeados);
+      } catch (err) {
+        console.error("Erro ao buscar produtos:", err);
+        setErro("Não foi possível carregar os produtos. Tente novamente mais tarde.");
+      } finally {
+        setCarregando(false);
+      }
+    };
+
+    carregarProdutos();
+
     const userData = localStorage.getItem("user");
     if (userData) {
-      const user = JSON.parse(userData);
-      setNomeUsuario(user.nome);
+      try {
+        const user = JSON.parse(userData);
+        if (user && user.nome) {
+          setNomeUsuario(user.nome); 
+        }
+      } catch (error) {
+        console.error('Erro ao ler usuário do localStorage:', error);
+      }
     }
+
   }, []);
+
 
   const BotaoSair = () => {
     localStorage.removeItem("user");
@@ -34,9 +82,33 @@ const HomePage: React.FC = () => {
     window.location.reload();
   };
 
-  const BotaoAdicionarAoCarrinho = (idProduto: string) => {
-    alert(`Produto ${idProduto} adicionado ao carrinho!`);
+  const BotaoAdicionarAoCarrinho = (produto: Product) => {
+    dispatch(adicionarItem(produto));
+    alert(`${produto.nome} adicionado ao carrinho!`);
   };
+
+  if (carregando) {
+    return (
+      <div className="flex flex-col min-h-screen bg-rose-300 text-amber-900 font-adlam items-center justify-center">
+        <p className="text-2xl">Carregando produtos...</p>
+      </div>
+    );
+  }
+
+  if (erro) {
+    return (
+      <div className="flex flex-col min-h-screen bg-rose-300 text-red-700 font-adlam items-center justify-center">
+        <p className="text-2xl">Erro ao carregar produtos: {erro}</p>
+      </div>
+    );
+  }
+
+  {/*const produtosEletronicos = produtosCarregados.filter(produto => 
+    produto.nome.toLowerCase().includes('electron') || 
+    produto.nome.toLowerCase().includes('laptop') ||
+    produto.nome.toLowerCase().includes('pc') ||
+    produto.nome.toLowerCase().includes('computer')
+  ); */}
 
   return (
     <div className="flex flex-col min-h-screen bg-rose-300 text-amber-900 font-adlam">
@@ -44,15 +116,17 @@ const HomePage: React.FC = () => {
       
       <main className="flex-grow p-5 max-w-5xl mx-auto my-5 bg-rose-300">
         <SecaoProduto
-          titulo="Produtos"
-          produtos={todosProdutos}
+          titulo="Todos os Produtos"
+          produtos={produtosCarregados}
           adicionarAoCarrinho={BotaoAdicionarAoCarrinho}
         />
-        <SecaoProduto
-          titulo="Eletrônicos"
-          produtos={produtosEletronicos}
-          adicionarAoCarrinho={BotaoAdicionarAoCarrinho}
-        />
+       {/* {produtosEletronicos.length > 0 && (
+          <SecaoProduto
+            titulo="Eletrônicos"
+            produtos={produtosEletronicos}
+            adicionarAoCarrinho={BotaoAdicionarAoCarrinho}
+          />
+        )}*/}
       </main>
 
       <Footer />
