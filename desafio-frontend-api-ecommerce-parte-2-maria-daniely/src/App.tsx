@@ -1,3 +1,4 @@
+// src/App.tsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from "./components/Login/Login"; 
 import HomePage from './components/HomePage/HomePage';
@@ -11,7 +12,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login />} /> 
           <Route path="/home" element={<HomePage />} /> 
           <Route path="/cadastro" element={<SignUp />} />
           <Route path="/carrinho" element={<CartPage />} />

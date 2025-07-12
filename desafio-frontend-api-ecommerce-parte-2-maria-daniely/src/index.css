@@ -1,7 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap');
 @import "tailwindcss";
 
-@layer utilities {
-    .font-adlam {
-        font-family: 'ADLaM Display', sans-serif;
-    }
+body {
+  font-family: 'Adlam Display', cursive; 
 }

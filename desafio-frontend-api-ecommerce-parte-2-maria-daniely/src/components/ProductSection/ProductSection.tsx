@@ -1,17 +1,11 @@
 import React from 'react';
-import ProductCard from '../ProductCard/ProductCard'; 
-
-interface Produto {
-  id: string;
-  nome: string; 
-  imagemUrl?: string; 
-  valor: number;
-}
+import ProductCard from '../ProductCard/ProductCard';
+import type { Product } from '../../types/cartTypes'; 
 
 interface PropsSecaoProduto {
   titulo: string;
-  produtos: Produto[];
-  adicionarAoCarrinho: (idProduto: string) => void;
+  produtos: Product[]; 
+  adicionarAoCarrinho: (produto: Product) => void;
 }
 
 const SecaoProduto: React.FC<PropsSecaoProduto> = ({ titulo, produtos, adicionarAoCarrinho }) => {
@@ -20,12 +14,13 @@ const SecaoProduto: React.FC<PropsSecaoProduto> = ({ titulo, produtos, adicionar
       <h2 className="text-3xl font-adlam text-black text-center mb-6 pt-5">{titulo}</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {produtos.map((produto) => (
-          <ProductCard 
+          <ProductCard
             key={produto.id}
-            nomeProduto={produto.nome} 
-            urlImagem={produto.imagemUrl} 
+            id={produto.id}
+            nomeProduto={produto.nome}
+            urlImagem={produto.imagemUrl}
             valor={produto.valor}
-            adicionarAoCarrinho={() => adicionarAoCarrinho(produto.id)}
+            adicionarAoCarrinho={() => adicionarAoCarrinho(produto)}
           />
         ))}
       </div>
