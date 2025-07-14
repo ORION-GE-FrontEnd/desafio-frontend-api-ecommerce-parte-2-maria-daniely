@@ -41,6 +41,7 @@ As tecnologias foram escolhidas com foco em escalabilidade, experiência do usu�
 |--------------|----------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
 | **Node.js**  | ![Node.js](https://img.shields.io/badge/Node.js-5FA04E.svg?style=for-the-badge&logo=nodedotjs&logoColor=white)                   | Permite desenvolvimento de servidores escaláveis com JavaScript, focando em I/O eficiente.         |
 | **Express**  | ![Express](https://img.shields.io/badge/Express-000000.svg?style=for-the-badge&logo=Express&logoColor=white)                    | Framework minimalista e flexível para rotas e middlewares no Node.js.                              |
+| **Fake Store API** | ![Fake Store API](https://img.shields.io/badge/Fake%20Store%20API-black?style=for-the-badge&logo=databricks) | API REST simulando uma loja virtual, com endpoints de produtos, categorias, carrinhos e usuários. | 
 
 ---
 
