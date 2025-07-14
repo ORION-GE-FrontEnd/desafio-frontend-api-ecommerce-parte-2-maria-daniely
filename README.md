@@ -30,6 +30,7 @@ As tecnologias foram escolhidas com foco em escalabilidade, experiência do usu�
 | **TypeScript**   | ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white)                      | Fornece tipagem estática ao JavaScript, melhorando a legibilidade e segurança do código.                                  |
 | **Tailwind CSS** | ![Tailwind](https://img.shields.io/badge/Tailwind%20CSS-06B6D4.svg?style=for-the-badge&logo=Tailwind-CSS&logoColor=white)                  | Framework utilitário que permite estilização rápida e responsiva sem sair do HTML.                                        |
 | **localStorage** | ![localStorage](https://img.shields.io/badge/localStorage-FFA500.svg?style=for-the-badge&logo=webcomponentsdotorg&logoColor=white)        | Utilizado para armazenar localmente os dados dos usuários cadastrados e manter o estado de login após recarregamento.     |
+| **React Hook Form** | ![ReactHookForm](https://img.shields.io/badge/React%20Hook%20Form-EC5990.svg?style=for-the-badge&logo=React-Hook-Form&logoColor=white) | Utilizado para personalizar a validação de formulários no React
 
 ---
 
