@@ -2,8 +2,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../Schemas/loginSchema";
 import Footer from "../Footer/Footer";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../context/useAuth"
 
 type LoginFormInputs = {
   email: string;
@@ -13,6 +14,7 @@ type LoginFormInputs = {
 const Login = () => {
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState("");
+  const { login } = useAuth();
 
   const {
     register,
@@ -27,13 +29,14 @@ const Login = () => {
     const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
 
     const foundUser = storedUsers.find(
-      (user: { email: string; password: string }) => 
+      (user: { email: string; password: string }) =>
         user.email === data.email && user.password === data.password
     );
 
-    if(foundUser) {
+    if (foundUser) {
       localStorage.setItem("user", JSON.stringify(foundUser));
       setLoginError("");
+      login();
       alert("Login realizado com sucesso!");
       navigate("/home");
     } else {
@@ -85,7 +88,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full bg-gray-800 text-pink-400 font-adlam px-6 py-3 text-lg rounded hover:bg-gray-700 transition-colors"
+            className="w-full bg-gray-800 text-rose-200 font-adlam px-6 py-3 text-lg rounded hover:bg-gray-700 transition-colors"
           >
             Login
           </button>
@@ -93,9 +96,11 @@ const Login = () => {
       </main>
 
       <div className="flex items-center justify-center py-10 px-4 text-center">
-        <p className="font-adlam text-amber-900">
-          Ainda é novo por aqui? Crie sua conta
-        </p>
+        <Link to="/cadastro">
+          <p className="font-adlam text-amber-900">
+            Ainda é novo por aqui? Crie sua conta
+          </p>
+        </Link>
       </div>
 
       <Footer />
