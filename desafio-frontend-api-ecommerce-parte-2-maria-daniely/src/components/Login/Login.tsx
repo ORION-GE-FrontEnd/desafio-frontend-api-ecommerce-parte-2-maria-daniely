@@ -4,6 +4,7 @@ import { loginSchema } from "../../Schemas/loginSchema";
 import Footer from "../Footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../context/useAuth"
 
 type LoginFormInputs = {
   email: string;
@@ -13,6 +14,7 @@ type LoginFormInputs = {
 const Login = () => {
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState("");
+  const { login } = useAuth();
 
   const {
     register,
@@ -27,13 +29,14 @@ const Login = () => {
     const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
 
     const foundUser = storedUsers.find(
-      (user: { email: string; password: string }) => 
+      (user: { email: string; password: string }) =>
         user.email === data.email && user.password === data.password
     );
 
-    if(foundUser) {
+    if (foundUser) {
       localStorage.setItem("user", JSON.stringify(foundUser));
       setLoginError("");
+      login();  // aqui marca o usuário como autenticado
       alert("Login realizado com sucesso!");
       navigate("/home");
     } else {
