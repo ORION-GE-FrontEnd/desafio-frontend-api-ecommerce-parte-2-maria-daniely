@@ -36,7 +36,7 @@ const Login = () => {
     if (foundUser) {
       localStorage.setItem("user", JSON.stringify(foundUser));
       setLoginError("");
-      login();  // aqui marca o usuário como autenticado
+      login();
       alert("Login realizado com sucesso!");
       navigate("/home");
     } else {
