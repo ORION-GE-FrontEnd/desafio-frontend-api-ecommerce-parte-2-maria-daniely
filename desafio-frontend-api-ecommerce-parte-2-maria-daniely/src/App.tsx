@@ -8,6 +8,7 @@ import CartPage from './components/CartPage/CartPage';
 import './index.css';
 import PaymentForm from './components/PaymentForm/PaymentForm';
 
+
 function App() {
   return (
     <AuthProvider>
@@ -43,9 +44,10 @@ function App() {
               </ProtectedRoute>
             }
           />
-
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+
+        
       </BrowserRouter>
     </AuthProvider>
   );

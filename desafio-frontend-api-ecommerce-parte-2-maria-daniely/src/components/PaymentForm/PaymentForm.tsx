@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import { useNavigate } from "react-router-dom"; 
 
 interface Usuario {
   nome: string;
@@ -21,7 +22,9 @@ const paymentSchema = yup.object({
 type PaymentFormData = yup.InferType<typeof paymentSchema>;
 
 const PaymentForm = () => {
+
   const [nomeUsuario, setNomeUsuario] = useState("Visitante");
+  const navigate = useNavigate(); 
 
   // Função local para logout
   const encerrarSessao = () => {
@@ -54,7 +57,9 @@ const PaymentForm = () => {
 
   const onSubmit = (data: PaymentFormData) => {
     console.log("Dados enviados:", data);
-    alert("Pagamento realizado com sucesso!");
+    localStorage.setItem("paymentDetails", JSON.stringify(data)); 
+    alert("Dados de pagamento validados! Redirecionando para o resumo do pedido.");
+    navigate("/resumo-pedido"); 
   };
 
   const formasPagamento = [
