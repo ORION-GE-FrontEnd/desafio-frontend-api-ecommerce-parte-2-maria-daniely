@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { adicionarItem } from '../../store/cartSlice';
 import type { Product } from '../../types/cartTypes';
 
-// formato dos dados da Fake Store API
 interface ProductAPI {
   id: number;
   title: string;
@@ -27,20 +26,19 @@ const HomePage: React.FC = () => {
   const [carregando, setCarregando] = useState<boolean>(true);
   const [erro, setErro] = useState<string | null>(null);
 
-
-  const [nomeUsuario, setNomeUsuario] = useState('Visitante'); 
+  const [nomeUsuario, setNomeUsuario] = useState('Visitante');
 
   useEffect(() => {
     const carregarProdutos = async () => {
       try {
         setCarregando(true);
-        setErro(null); 
+        setErro(null);
         const resposta = await fetch('https://fakestoreapi.com/products');
-        
+
         if (!resposta.ok) {
           throw new Error(`Erro HTTP! Status: ${resposta.status}`);
         }
-        
+
         const dados: ProductAPI[] = await resposta.json();
 
         const produtosMapeados: Product[] = dados.map(item => ({
@@ -49,10 +47,10 @@ const HomePage: React.FC = () => {
           imagemUrl: item.image,
           valor: item.price,
         }));
-        
+
         setProdutosCarregados(produtosMapeados);
       } catch (err) {
-        console.error("Erro ao buscar produtos:", err);
+        console.error("Erro ao carregar produtos:", err);
         setErro("Não foi possível carregar os produtos. Tente novamente mais tarde.");
       } finally {
         setCarregando(false);
@@ -66,15 +64,13 @@ const HomePage: React.FC = () => {
       try {
         const user = JSON.parse(userData);
         if (user && user.nome) {
-          setNomeUsuario(user.nome); 
+          setNomeUsuario(user.nome);
         }
       } catch (error) {
         console.error('Erro ao ler usuário do localStorage:', error);
       }
     }
-
   }, []);
-
 
   const BotaoSair = () => {
     localStorage.removeItem("user");
@@ -103,30 +99,16 @@ const HomePage: React.FC = () => {
     );
   }
 
-  {/*const produtosEletronicos = produtosCarregados.filter(produto => 
-    produto.nome.toLowerCase().includes('electron') || 
-    produto.nome.toLowerCase().includes('laptop') ||
-    produto.nome.toLowerCase().includes('pc') ||
-    produto.nome.toLowerCase().includes('computer')
-  ); */}
-
   return (
     <div className="flex flex-col min-h-screen bg-rose-300 text-amber-900 font-adlam">
       <Header nomeUsuario={nomeUsuario} encerrarSessao={BotaoSair} />
       
-      <main className="flex-grow p-5 max-w-5xl mx-auto my-5 bg-rose-300">
+      <main className="flex-grow px-4 py-5 max-w-7xl mx-auto my-5 bg-rose-300 sm:px-6 md:px-8 lg:px-10"> 
         <SecaoProduto
           titulo="Todos os Produtos"
           produtos={produtosCarregados}
           adicionarAoCarrinho={BotaoAdicionarAoCarrinho}
         />
-       {/* {produtosEletronicos.length > 0 && (
-          <SecaoProduto
-            titulo="Eletrônicos"
-            produtos={produtosEletronicos}
-            adicionarAoCarrinho={BotaoAdicionarAoCarrinho}
-          />
-        )}*/}
       </main>
 
       <Footer />

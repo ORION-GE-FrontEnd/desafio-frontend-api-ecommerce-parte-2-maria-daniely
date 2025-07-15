@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './components/AutoProvider/AutoProvider';
-import { ProtectedRoute } from '../src/ProtectedRoute/ProtectedRoute';
+import { ProtectedRoute } from './ProtectedRoute/ProtectedRoute';
 import Login from "./components/Login/Login"; 
 import HomePage from './components/HomePage/HomePage';
 import SignUp from './components/SignUp/SignUp';
 import CartPage from './components/CartPage/CartPage';
 import './index.css';
 import PaymentForm from './components/PaymentForm/PaymentForm';
+import OrderSummary from './components/OrderSummary/OrderSummary'; 
 
 function App() {
   return (
@@ -43,6 +44,15 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route
+            path="/resumo-pedido" 
+            element={ 
+              <ProtectedRoute> 
+                <OrderSummary /> 
+              </ProtectedRoute> 
+            } 
+          /> 
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
