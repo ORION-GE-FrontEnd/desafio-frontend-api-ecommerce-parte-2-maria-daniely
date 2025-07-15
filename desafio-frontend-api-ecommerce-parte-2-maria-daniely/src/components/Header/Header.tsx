@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({ nomeUsuario, encerrarSessao }) =>
     if(encerrarSessao) {
       encerrarSessao();
     }
-    navigate("/login");
+    navigate("/");
   };
 
   return (

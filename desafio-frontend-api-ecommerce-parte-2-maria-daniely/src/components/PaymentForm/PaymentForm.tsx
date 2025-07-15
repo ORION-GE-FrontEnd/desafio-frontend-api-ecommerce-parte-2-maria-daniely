@@ -5,10 +5,6 @@ import * as yup from "yup";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-interface PaymentFormProps {
-  encerrarSessao: () => void;
-}
-
 interface Usuario {
   nome: string;
 }
@@ -24,8 +20,14 @@ const paymentSchema = yup.object({
 
 type PaymentFormData = yup.InferType<typeof paymentSchema>;
 
-const PaymentForm = ({ encerrarSessao }: PaymentFormProps) => {
+const PaymentForm = () => {
   const [nomeUsuario, setNomeUsuario] = useState("Visitante");
+
+  // Função local para logout
+  const encerrarSessao = () => {
+    localStorage.removeItem("user");
+    window.location.href = "/";
+  };
 
   useEffect(() => {
     const userData = localStorage.getItem("user");

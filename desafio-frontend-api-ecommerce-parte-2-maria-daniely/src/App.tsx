@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './components/AutoProvider/AutoProvider';
 import { ProtectedRoute } from '../src/ProtectedRoute/ProtectedRoute';
 import Login from "./components/Login/Login"; 
@@ -13,7 +13,8 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Navigate to="/" />} />
           <Route path="/cadastro" element={<SignUp />} />
 
           <Route
@@ -42,6 +43,8 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
