@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap');
+@import "tailwindcss";
+
+body {
+  font-family: 'Adlam Display', cursive; 
+}
