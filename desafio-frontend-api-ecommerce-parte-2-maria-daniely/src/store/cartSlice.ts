@@ -48,17 +48,15 @@ const cartSlice = createSlice({
     },
   
     alterarQuantidade: (state, action: PayloadAction<{ id: string; novaQuantidade: number }>) => {
-      const { id, novaQuantidade } = action.payload;
-      const itemExistente = state.itens.find(item => item.id === id);
+    const { id, novaQuantidade } = action.payload;
+    const itemExistente = state.itens.find(item => item.id === id);
 
-      if (itemExistente) {
-        itemExistente.quantidade = Math.max(1, novaQuantidade);
-        if (itemExistente.quantidade === 0) {
-          state.itens = state.itens.filter(item => item.id !== id);
-        }
-      }
-      salvarCarrinhoNoLocalStorage(state.itens); 
-    },
+    if (itemExistente) {
+      itemExistente.quantidade = Math.max(1, novaQuantidade);
+    }
+
+    salvarCarrinhoNoLocalStorage(state.itens);
+  },
 
     removerItem: (state, action: PayloadAction<string>) => {
       const idRemover = action.payload;
