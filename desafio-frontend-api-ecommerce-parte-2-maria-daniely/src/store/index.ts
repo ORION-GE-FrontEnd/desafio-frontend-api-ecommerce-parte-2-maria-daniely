@@ -5,6 +5,11 @@ export const store = configureStore({
   reducer: {
     carrinho: cartReducer,
   },
+  preloadedState: {
+    carrinho: {
+      itens: [],
+    },
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
