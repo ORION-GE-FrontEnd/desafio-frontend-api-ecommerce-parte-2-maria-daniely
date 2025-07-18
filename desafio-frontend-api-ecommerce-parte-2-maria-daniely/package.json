@@ -23,7 +23,8 @@
     "redux": "^5.0.1",
     "tailwindcss": "^4.1.11",
     "util": "^0.12.5",
-    "yup": "^1.6.1"
+    "yup": "^1.6.1",
+    "vite": "^7.0.5"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.28.0",
