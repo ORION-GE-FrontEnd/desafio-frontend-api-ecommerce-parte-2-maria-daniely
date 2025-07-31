@@ -10,7 +10,9 @@
     "serve": "vite preview",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "test:e2e": "cypress open",
+    "test:e2e:headless": "cypress run"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
