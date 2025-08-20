@@ -1,0 +1,22 @@
+{
+  "name": "e-commerce-api",
+  "version": "1.0.0",
+  "description": "Desenvolver o backend de um sistema de **E-commerce** que permita:\r - Gerenciamento de produtos.\r - Adição e atualização de itens no carrinho de compras.\r - Processamento de pedidos (checkout) e controle de estoque.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "npx nodemon app.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "jest": "^30.0.3",
+    "supertest": "^7.1.1"
+  }
+}
