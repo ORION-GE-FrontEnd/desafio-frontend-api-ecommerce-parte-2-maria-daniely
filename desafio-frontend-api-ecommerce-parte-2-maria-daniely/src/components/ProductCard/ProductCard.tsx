@@ -1,5 +1,6 @@
 import React from 'react';
-import type { Product } from '../../types/cartTypes'; 
+import type { Product } from '../../types/cartTypes';
+import productPlaceholder from '/src/assets/compras.png';
 
 interface PropsProdutoCard {
   id: string;
@@ -20,11 +21,11 @@ const ProdutoCard: React.FC<PropsProdutoCard> = ({ id, urlImagem, nomeProduto, v
   return (
     <div className="bg-amber-50 rounded-lg p-4 text-center shadow-md flex flex-col items-center gap-3 w-52 min-h-[280px] box-border">
       <div className="w-full h-32 bg-gray-300 rounded-md flex justify-center items-center overflow-hidden">
-        {urlImagem ? (
-          <img src={urlImagem} alt={nomeProduto} className="w-full h-full object-cover" />
-        ) : (
-          <span className="text-xl font-bold font-adlam text-black">Foto</span>
-        )}
+        <img
+          src={productPlaceholder}
+          alt={nomeProduto}
+          className="w-full h-full object-cover border border-gray-800 rounded-md"
+        />
       </div>
       <h3 className="text-lg font-semibold font-adlam text-black mt-2">{nomeProduto}</h3>
       <p className="text-xl font-bold font-adlam text-amber-900">
