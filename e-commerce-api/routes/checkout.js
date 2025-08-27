@@ -3,18 +3,39 @@ const router = express.Router();
 
 let products = require('../data/products'); 
 let cartModule = require('./cart');
-let cart = cartModule.cart; // Corrigido: pega referência real do carrinho
-let orders = []; 
+let cart = cartModule.cart;
+
+// ===================================================================
+// DADOS DE TESTE - Substitua a linha let orders = []; por esta:
+// ===================================================================
+let orders = [
+  {
+    orderId: '12',
+    items: [
+      { productId: 1, name: 'Camiseta', quantity: 2, price: 49.90 },
+      { productId: 5, name: 'Boné', quantity: 1, price: 39.90 }
+    ],
+    totalAmount: 139.7,
+    status: 'paid',
+    paymentMethod: 'credit_card',
+    address: 'Rua de Teste, 123, Bairro Exemplo',
+    createdAt: new Date().toISOString()
+  }
+]; 
+// ===================================================================
 
 // Geradora de IDs
 const generateOrderId = () => {
+  // ... (resto do seu código, sem alterações)
   const maxId = orders.length > 0
     ? Math.max(...orders.map(o => parseInt(o.orderId) || 0))
     : 0;
   return (maxId + 1).toString();
 };
 
-// Iniciar o checkout
+// ... (todo o resto do seu arquivo checkout.js continua igual)
+// router.post('/checkout', ... etc
+
 router.post('/checkout', (req, res) => {
   const { paymentMethod, address } = req.body;
 
@@ -140,6 +161,11 @@ router.get('/orders/:orderId', (req, res) => {
   } else {
     res.status(404).json({ error: 'Pedido não encontrado.' });
   }
+});
+
+router.get('/orders', (req, res) => {
+    // A variável 'orders' já existe no topo deste arquivo
+    res.status(200).json(orders); 
 });
 
 module.exports = router;
